@@ -10,89 +10,65 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as appOrdersIndexRouteImport } from './routes/(app)/orders/index'
-import { Route as appCustomersIndexRouteImport } from './routes/(app)/customers/index'
-import { Route as appOrdersOrderIdRouteImport } from './routes/(app)/orders/$orderId'
-import { Route as appCustomersCustomerIdRouteImport } from './routes/(app)/customers/$customerId'
+import { Route as dashboardDashboardRouteRouteImport } from './routes/(dashboard)/dashboard/route'
+import { Route as dashboardDashboardIndexRouteImport } from './routes/(dashboard)/dashboard/index'
+import { Route as dashboardDashboardUsersRouteImport } from './routes/(dashboard)/dashboard/users'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const appOrdersIndexRoute = appOrdersIndexRouteImport.update({
-  id: '/(app)/orders/',
-  path: '/orders/',
+const dashboardDashboardRouteRoute = dashboardDashboardRouteRouteImport.update({
+  id: '/(dashboard)/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const appCustomersIndexRoute = appCustomersIndexRouteImport.update({
-  id: '/(app)/customers/',
-  path: '/customers/',
-  getParentRoute: () => rootRouteImport,
+const dashboardDashboardIndexRoute = dashboardDashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => dashboardDashboardRouteRoute,
 } as any)
-const appOrdersOrderIdRoute = appOrdersOrderIdRouteImport.update({
-  id: '/(app)/orders/$orderId',
-  path: '/orders/$orderId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const appCustomersCustomerIdRoute = appCustomersCustomerIdRouteImport.update({
-  id: '/(app)/customers/$customerId',
-  path: '/customers/$customerId',
-  getParentRoute: () => rootRouteImport,
+const dashboardDashboardUsersRoute = dashboardDashboardUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => dashboardDashboardRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/customers/$customerId': typeof appCustomersCustomerIdRoute
-  '/orders/$orderId': typeof appOrdersOrderIdRoute
-  '/customers': typeof appCustomersIndexRoute
-  '/orders': typeof appOrdersIndexRoute
+  '/dashboard': typeof dashboardDashboardRouteRouteWithChildren
+  '/dashboard/users': typeof dashboardDashboardUsersRoute
+  '/dashboard/': typeof dashboardDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/customers/$customerId': typeof appCustomersCustomerIdRoute
-  '/orders/$orderId': typeof appOrdersOrderIdRoute
-  '/customers': typeof appCustomersIndexRoute
-  '/orders': typeof appOrdersIndexRoute
+  '/dashboard/users': typeof dashboardDashboardUsersRoute
+  '/dashboard': typeof dashboardDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/(app)/customers/$customerId': typeof appCustomersCustomerIdRoute
-  '/(app)/orders/$orderId': typeof appOrdersOrderIdRoute
-  '/(app)/customers/': typeof appCustomersIndexRoute
-  '/(app)/orders/': typeof appOrdersIndexRoute
+  '/(dashboard)/dashboard': typeof dashboardDashboardRouteRouteWithChildren
+  '/(dashboard)/dashboard/users': typeof dashboardDashboardUsersRoute
+  '/(dashboard)/dashboard/': typeof dashboardDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/customers/$customerId'
-    | '/orders/$orderId'
-    | '/customers'
-    | '/orders'
+  fullPaths: '/' | '/dashboard' | '/dashboard/users' | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/customers/$customerId'
-    | '/orders/$orderId'
-    | '/customers'
-    | '/orders'
+  to: '/' | '/dashboard/users' | '/dashboard'
   id:
     | '__root__'
     | '/'
-    | '/(app)/customers/$customerId'
-    | '/(app)/orders/$orderId'
-    | '/(app)/customers/'
-    | '/(app)/orders/'
+    | '/(dashboard)/dashboard'
+    | '/(dashboard)/dashboard/users'
+    | '/(dashboard)/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  appCustomersCustomerIdRoute: typeof appCustomersCustomerIdRoute
-  appOrdersOrderIdRoute: typeof appOrdersOrderIdRoute
-  appCustomersIndexRoute: typeof appCustomersIndexRoute
-  appOrdersIndexRoute: typeof appOrdersIndexRoute
+  dashboardDashboardRouteRoute: typeof dashboardDashboardRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -104,43 +80,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(app)/orders/': {
-      id: '/(app)/orders/'
-      path: '/orders'
-      fullPath: '/orders'
-      preLoaderRoute: typeof appOrdersIndexRouteImport
+    '/(dashboard)/dashboard': {
+      id: '/(dashboard)/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof dashboardDashboardRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(app)/customers/': {
-      id: '/(app)/customers/'
-      path: '/customers'
-      fullPath: '/customers'
-      preLoaderRoute: typeof appCustomersIndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/(dashboard)/dashboard/': {
+      id: '/(dashboard)/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof dashboardDashboardIndexRouteImport
+      parentRoute: typeof dashboardDashboardRouteRoute
     }
-    '/(app)/orders/$orderId': {
-      id: '/(app)/orders/$orderId'
-      path: '/orders/$orderId'
-      fullPath: '/orders/$orderId'
-      preLoaderRoute: typeof appOrdersOrderIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(app)/customers/$customerId': {
-      id: '/(app)/customers/$customerId'
-      path: '/customers/$customerId'
-      fullPath: '/customers/$customerId'
-      preLoaderRoute: typeof appCustomersCustomerIdRouteImport
-      parentRoute: typeof rootRouteImport
+    '/(dashboard)/dashboard/users': {
+      id: '/(dashboard)/dashboard/users'
+      path: '/users'
+      fullPath: '/dashboard/users'
+      preLoaderRoute: typeof dashboardDashboardUsersRouteImport
+      parentRoute: typeof dashboardDashboardRouteRoute
     }
   }
 }
 
+interface dashboardDashboardRouteRouteChildren {
+  dashboardDashboardUsersRoute: typeof dashboardDashboardUsersRoute
+  dashboardDashboardIndexRoute: typeof dashboardDashboardIndexRoute
+}
+
+const dashboardDashboardRouteRouteChildren: dashboardDashboardRouteRouteChildren =
+  {
+    dashboardDashboardUsersRoute: dashboardDashboardUsersRoute,
+    dashboardDashboardIndexRoute: dashboardDashboardIndexRoute,
+  }
+
+const dashboardDashboardRouteRouteWithChildren =
+  dashboardDashboardRouteRoute._addFileChildren(
+    dashboardDashboardRouteRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  appCustomersCustomerIdRoute: appCustomersCustomerIdRoute,
-  appOrdersOrderIdRoute: appOrdersOrderIdRoute,
-  appCustomersIndexRoute: appCustomersIndexRoute,
-  appOrdersIndexRoute: appOrdersIndexRoute,
+  dashboardDashboardRouteRoute: dashboardDashboardRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
