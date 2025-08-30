@@ -1,7 +1,7 @@
-import { Separator } from "@radix-ui/react-separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { DynamicBreadcrumb } from "@/components/shared/dynamic-breadcrumb";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 export function AppHeader() {
   return (
