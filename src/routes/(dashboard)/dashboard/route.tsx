@@ -11,7 +11,7 @@ function RouteComponent() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset className="bg-muted/50">
+      <SidebarInset>
         {/* app header */}
         <AppHeader />
         {/* outlet */}

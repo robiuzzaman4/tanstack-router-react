@@ -15,7 +15,7 @@ export const NAVLINKS = {
       ],
     },
     {
-      title: "Storefront Management",
+      title: "Management",
       url: "#",
       items: [
         {
